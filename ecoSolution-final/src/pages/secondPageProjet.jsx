@@ -7,8 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import { Carousel } from "react-responsive-carousel";
-import YouTube, { YouTubeProps } from 'react-youtube';
-
+import YouTube, { YouTubeProps } from "react-youtube";
 
 const imgg1 = new URL("../../public/assets/IMG_blog1.jpg", import.meta.url);
 export default function SecondPageProjet({ data }) {
@@ -46,18 +45,16 @@ export default function SecondPageProjet({ data }) {
     console.log("hetha taille imta3 tableau images", projet?.images?.length);
   }, [projet]);
   const MyVideoComponent = () => {
-    const videoId = 'q9nAytDl0JA&list=RDq9nAytDl0JA&start_radio=1'; // Replace with your YouTube video ID
+    const videoId = "q9nAytDl0JA&list=RDq9nAytDl0JA&start_radio=1"; // Replace with your YouTube video ID
     const videoOptions = {
-      height: '360',
-      width: '640',
+      height: "360",
+      width: "640",
       playerVars: {
         autoplay: 1,
       },
-    };}
-  
-    
-  
-  
+    };
+  };
+
   return (
     <div>
       <Head>
@@ -67,20 +64,20 @@ export default function SecondPageProjet({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-   
-        <div className={styles.flex_container_page}>
-          <h2 className={styles.titre}>{projet.titre}</h2>
-          <div className={styles.type_adress}>
-            <h4>Type : {projet.type}</h4>
-            <h4>
-              Production annuelle du projet : {projet.productionAnuelle} KWC
-            </h4>
-            <h4>Adresse : {projet.adresse}</h4>
+       <div className={styles.flex_container}>
+         <div className={styles.project_info_container}>
+        <div className={styles.basic_info}>
+          <div className={styles.text_info}>
+            <div>
+              <h2>{projet.titre}</h2>
+              <h4>Type : {projet.type}</h4>
+              <h4>
+                Production annuelle du projet : {projet.productionAnuelle} KWC
+              </h4>
+              <h4>Adresse : {projet.adresse}</h4>
+            </div>
           </div>
-          <div className={styles.imgvid} >
-        
-          <div  style={{ maxWidth: "700px", margin: "0 auto",justifySelf:'center',alignSelf:"center" }}>
-         
+          <div className={styles.carroussel}>
             <Carousel showThumbs={false}>
               {projet.images &&
                 projet.images.map((image, index) => (
@@ -89,28 +86,25 @@ export default function SecondPageProjet({ data }) {
                   </div>
                 ))}
             </Carousel>
-           
-          </div>
-          <div className={styles.vid}>  <YouTube className={styles.vid} videoId='lpJilhkbC9s'  /> <div>
-        {/* Render the YouTube video */}
-      
-      </div></div>
-          </div>
-          <div className={styles.article}>{projet.description}</div>
-
-          <div className=" d-flex justify-content-center">
-            <button
-              className="blog-button  "
-              onClick={() => {
-                router.back();
-              }}>
-              {" "}
-              Retour
-            </button>
           </div>
         </div>
-        <Footer />
-    
+        <div className={styles.more_detailed_info}>
+             <div className={styles.project_video}>
+               <div className={styles.vid}>
+            <YouTube className={styles.vid} videoId={projet.video} />{" "}
+            <div>{/* Render the YouTube video */}</div>
+          </div>
+          </div>
+          <div className={styles.text_details}>
+            <p>{projet.description}</p>
+          </div>
+       
+          
+        </div>
+      </div>
+       </div>
+
+       <Footer />
     </div>
   );
 }
